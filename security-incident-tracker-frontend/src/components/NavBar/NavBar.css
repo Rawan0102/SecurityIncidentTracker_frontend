@@ -1,0 +1,71 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0f172a;
+  padding: 0.5rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-left .logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.navbar-logo {
+  height: 40px;
+  margin-right: 0.5rem;
+}
+
+.app-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #e2e8f0;
+  transition: color 0.2s;
+}
+
+.app-name:hover {
+  color: #60a5fa;
+}
+
+.navbar-right {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-item {
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.nav-item:hover {
+  background-color: #1e293b;
+  color: #60a5fa;
+}
+
+.active {
+  color: #1e293b;
+  color: white;
+}
+
+.logout-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+}
+
+.logout-btn:hover {
+  background-color: #dc2626;
+  color: white;
+}
