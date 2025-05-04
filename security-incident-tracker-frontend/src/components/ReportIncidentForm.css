@@ -1,0 +1,71 @@
+.report-incident-form {
+    max-width: 600px;
+    margin: 3rem auto;
+    padding: 2rem 2.5rem;
+    background: #1e1e2f;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
+    color: #f5f5f5;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .report-incident-form h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #00ffcc;
+  }
+  
+  .report-incident-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  
+  .report-incident-form label {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.95rem;
+    color: #ccc;
+  }
+  
+  .report-incident-form input,
+  .report-incident-form select,
+  .report-incident-form textarea {
+    background: #2a2a3b;
+    border: 1px solid #444;
+    padding: 0.7rem;
+    border-radius: 6px;
+    color: #eee;
+    font-size: 1rem;
+    transition: border 0.2s ease;
+  }
+  
+  .report-incident-form input:focus,
+  .report-incident-form select:focus,
+  .report-incident-form textarea:focus {
+    border-color: #00ffcc;
+    outline: none;
+  }
+  
+  .report-incident-form button {
+    background: linear-gradient(to right, #00ffcc, #00b386);
+    color: #000;
+    font-weight: bold;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .report-incident-form button:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 10px #00ffcc;
+  }
+  
+  .report-incident-form p {
+    text-align: center;
+    font-weight: bold;
+    color: #f33;
+  }
+  

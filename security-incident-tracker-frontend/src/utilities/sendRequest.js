@@ -13,7 +13,7 @@ export default async function sendRequest(url, method = 'GET', payload) {
     }
   
     try {
-      const res = await fetch(`http://127.0.0.1:8000${url}`, options);
+      const res = await fetch(url, options);
       if (!res.ok) {
         const errorData = await res.json();
         throw new Error(errorData.detail || 'Request failed');
@@ -24,4 +24,26 @@ export default async function sendRequest(url, method = 'GET', payload) {
       throw err;
     }
   }
+  
+// export default async function sendRequest(url, method = 'GET', body = null) {
+//     try {
+//       const response = await fetch(url, {
+//         method,
+//         headers: {
+//           'Content-Type': 'application/json',
+//           'Authorization': `Bearer ${localStorage.getItem('access')}`, 
+//         },
+//         body: body ? JSON.stringify(body) : null,
+//       });
+  
+//       if (!response.ok) {
+//         throw new Error(`HTTP error! Status: ${response.status}`);
+//       }
+//       console.log(response)
+//       return response.json();
+//     } catch (error) {
+//       console.error('Error in sendRequest:', error);
+//       throw error;  
+//     }
+//   }
   

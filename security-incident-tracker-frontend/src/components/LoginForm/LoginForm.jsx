@@ -21,7 +21,7 @@ function LoginForm() {
       const data = await response.json();
       localStorage.setItem('access', data.access);
       localStorage.setItem('refresh', data.refresh);
-      navigate('/'); 
+      navigate('/profile');
     } else {
       setError('Invalid credentials. Please try again.');
     }
