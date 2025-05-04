@@ -9,16 +9,21 @@ import ProfilePage from './Pages/ProfilePage';
 import IncidentForm from './components/IncidentForm';
 import IncidentList from './components/IncidentList';
 import ReportIncidentForm from './components/ReportIncidentForm';
+import { jwtDecode } from "jwt-decode";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
 
-
   useEffect(() => {
     const token = localStorage.getItem('access');
     if (token) {
-      setCurrentUser({ token });
-      console.log(token)
+      try {
+        const decoded = jwtDecode(token);
+        setCurrentUser({ ...decoded, token });  // includes user info + token
+        console.log("Decoded user:", decoded);
+      } catch (err) {
+        console.error("Failed to decode token:", err);
+      }
     }
   }, []);
 
@@ -39,7 +44,7 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/profile" element={<ProfilePage user={currentUser} />} />
         <Route path="/report" element={<IncidentForm />} />
-        <Route path="/incidents" element={<IncidentList />} />
+        <Route path="/incidents" element={<IncidentList user={currentUser} />} />
         <Route path="/report" element={<ReportIncidentForm />} />
 
       </Routes>
