@@ -10,6 +10,7 @@ import IncidentForm from './components/IncidentForm';
 import IncidentList from './components/IncidentList';
 import ReportIncidentForm from './components/ReportIncidentForm';
 import { jwtDecode } from "jwt-decode";
+import IncidentDetail from './components/IncidentDetail';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -45,6 +46,8 @@ function App() {
         <Route path="/profile" element={<ProfilePage user={currentUser} />} />
         <Route path="/report" element={<IncidentForm />} />
         <Route path="/incidents" element={<IncidentList user={currentUser} />} />
+        <Route path="/incidents/:id" element={<IncidentDetail user={currentUser?.username} role={currentUser?.role} />} />
+        <Route path="/incidents/:id" element={<IncidentDetail />} />
         <Route path="/report" element={<ReportIncidentForm />} />
 
       </Routes>

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import './IncidentList.css';
 import SeverityBadge from './SeverityBadge'; 
 import '../App.css';
+import { Link } from 'react-router-dom';
+
 
 function IncidentList({ user, role }) {
   const [incidents, setIncidents] = useState([]);
@@ -87,7 +89,7 @@ function IncidentList({ user, role }) {
       ) : (
         <div className="incident-grid">
           {incidents.map((incident) => (
-            <IncidentCard key={incident.id} incident={incident} />
+            <IncidentCard key={incident.id} incident={incident}role={role} />
           ))}
         </div>
       )}
@@ -95,20 +97,19 @@ function IncidentList({ user, role }) {
   );
 }
 
-function IncidentCard({ incident }) {
-  return (
-    <div className="incident-card">
-      <h3>{incident.title}</h3>
-      <p>{incident.description}</p>
-      <div className="info-row">
-        <SeverityBadge level={incident.severity} />
-        <span className="timestamp">
-          {new Date(incident.created_at).toLocaleString()}
-        </span>
-      </div>
-    </div>
-  );
-}
-
+function IncidentCard({ incident, role }) {
+    return (
+      <Link to={`/incidents/${incident.id}`} state={{role: role}} className="incident-card">
+        <h3>{incident.title}</h3>
+        <p>{incident.description}</p>
+        <div className="info-row">
+          <SeverityBadge level={incident.severity} />
+          <span className="timestamp">
+            {new Date(incident.created_at).toLocaleString()}
+          </span>
+        </div>
+      </Link>
+    );
+  }
 export default IncidentList;
 
