@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LoginForm.css';
+import { jwtDecode } from 'jwt-decode'; 
 
-function LoginForm() {
+
+function LoginForm({setCurrentUser}) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -10,17 +12,22 @@ function LoginForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const response = await fetch('http://localhost:8000/api/token/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username: username, password: password }),
+      body: JSON.stringify({ username, password }),
     });
-
+  
     if (response.ok) {
       const data = await response.json();
       localStorage.setItem('access', data.access);
       localStorage.setItem('refresh', data.refresh);
+  
+      const decoded = jwtDecode(data.access);
+      
+      setCurrentUser({ ...decoded, token: data.access });
+  
       navigate('/profile');
     } else {
       setError('Invalid credentials. Please try again.');

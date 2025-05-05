@@ -46,4 +46,21 @@ export async function reportIncident(incidentData) {
   
     return await response.json();
   }
+
+  export const fetchUserProfile = async (userId) => {
+    const res = await fetch(`/api/profiles/${userId}/`);
+    if (!res.ok) throw new Error('Profile not found');
+    return res.json();
+  };
+  
+  export const fetchIncidents = async () => {
+    const token = localStorage.getItem('access');
+    const res = await fetch('/api/incidents/', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (!res.ok) throw new Error('Failed to fetch incidents');
+    return res.json();
+  };
   

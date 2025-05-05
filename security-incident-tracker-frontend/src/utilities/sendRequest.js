@@ -24,6 +24,15 @@ export default async function sendRequest(url, method = 'GET', payload) {
       throw err;
     }
   }
+//   const response = await fetch('http://localhost:8000/api/incidents/', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//       Authorization: `Bearer ${token}`,
+//     },
+//     body: JSON.stringify(formData), 
+//   });
+  
   
 // export default async function sendRequest(url, method = 'GET', body = null) {
 //     try {

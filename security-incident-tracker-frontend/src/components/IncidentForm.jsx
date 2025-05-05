@@ -1,13 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function IncidentForm() {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
     severity: 'low',
+    assigned: '',
   });
+  const [users, setUsers] = useState([]);
   const [success, setSuccess] = useState('');
   const [error, setError] = useState('');
+
+  // Fetch users for dropdown
+  useEffect(() => {
+    const token = localStorage.getItem('access');
+    async function fetchUsers() {
+      try {
+        const res = await fetch('http://localhost:8000/api/users/', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (res.ok) {
+          const data = await res.json();
+          setUsers(data);
+          console.log('Fetched users:', data);  // ✅ moved here
+        } else {
+          console.error('Failed to fetch users.');
+        }
+      } catch (err) {
+        console.error('Error fetching users:', err);
+      }
+    }
+    fetchUsers();
+  }, []);
 
   const handleChange = (e) => {
     setFormData({ 
@@ -32,7 +58,7 @@ function IncidentForm() {
 
       if (response.ok) {
         setSuccess('Incident reported successfully!');
-        setFormData({ title: '', description: '', severity: 'low' });
+        setFormData({ title: '', description: '', severity: 'low', assigned: '' });
         setError('');
       } else {
         const errorData = await response.json();
@@ -84,6 +110,22 @@ function IncidentForm() {
           <option value="medium">🟨 Medium</option>
           <option value="high">🟧 High</option>
           <option value="critical">🟥 Critical</option>
+        </select>
+      </label>
+
+      <label>
+        Assign To:
+        <select 
+          name="assigned" 
+          value={formData.assigned} 
+          onChange={handleChange}
+        >
+          <option value="">-- Select a user --</option>
+          {users.map((user) => (
+            <option key={user.id} value={user.id}>
+              {user.username}
+            </option>
+          ))}
         </select>
       </label>
 

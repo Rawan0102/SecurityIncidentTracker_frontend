@@ -50,3 +50,52 @@
     width: auto;
     margin-bottom: 1rem;
   }
+  .home-container {
+    background-image: url('../assets/backk.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3rem;
+    color: white;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+  }
+  
+  .home-container.fade-in {
+    opacity: 1;
+  }
+  
+  /* .left-side {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  } */
+  
+  .right-side {
+    flex: 1;
+    padding: 2rem;
+    text-align: right;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .logo {
+    width: 150px;
+  }
+  
+  .welcome {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .description {
+    font-size: 1.2rem;
+    max-width: 500px;
+    margin-left: auto;
+  }
+  

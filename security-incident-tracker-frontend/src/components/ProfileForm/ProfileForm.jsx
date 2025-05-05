@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { createProfile } from '../../utilities/api';
 
-export default function ProfileForm({ userId }) {
+export default function ProfileForm({ userId, onProfileCreated  }) {
   const [formData, setFormData] = useState({
     user: userId,
     bio: '',
@@ -21,6 +21,7 @@ export default function ProfileForm({ userId }) {
     try {
       const newProfile = await createProfile(formData);
       console.log('Profile created:', newProfile);
+      onProfileCreated(newProfile);
     } catch (err) {
       console.error('Error creating profile:', err);
     }

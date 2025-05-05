@@ -6,16 +6,11 @@ import '../App.css';
 function IncidentList({ user, role }) {
   const [incidents, setIncidents] = useState([]);
   const [error, setError] = useState('');
+  const [statusFilter, setStatusFilter] = useState(true); // 'open' or 'closed'
 
   useEffect(() => {
-    // Only fetch & filter if manager
-    if (role !== 'manager') {
-      setIncidents([]);
-      return;
-    }
-
+    const token = localStorage.getItem('access');
     const fetchIncidents = async () => {
-      const token = localStorage.getItem('access');
       try {
         const response = await fetch('http://localhost:8000/api/incidents/', {
           headers: {
@@ -26,15 +21,28 @@ function IncidentList({ user, role }) {
 
         if (response.ok) {
           const data = await response.json();
-          console.log('data',data)
-          // filter incidents created by this manager
-          const manager = user.username;
-          console.log('manager', user)
-          const myIncidents = data.filter(
-            (incident) => incident.reporter === manager && incident.status === 'open'
-          );
-          setIncidents(myIncidents);
-          console.log('incidents', incidents)
+          console.log('data', data);
+
+          let filtered = [];
+
+          if (role === 'manager') {
+            const manager = user.username;
+            filtered = data.filter(
+              (incident) =>
+                incident.reporter === manager &&
+                incident.resolved === statusFilter
+            );
+          } else if (role === 'employee') {
+            const employee = user.user_id;
+            filtered = data.filter(
+              (incident) =>
+                incident.assigned === employee &&
+                incident.resolved === statusFilter
+            );
+          }
+
+          setIncidents(filtered);
+          console.log('filtered incidents', filtered);
         } else {
           setError('Failed to fetch incidents.');
         }
@@ -45,19 +53,37 @@ function IncidentList({ user, role }) {
     };
 
     fetchIncidents();
-  }, [user, role]);
+  }, [user, role, statusFilter]);
 
   if (error) return <p className="error">{error}</p>;
 
-  if (role !== 'manager') {
-    return null; // or a message like <p>Only managers see this list.</p>
-  }
-
   return (
     <div className="incident-list-container">
-      <h2>My Open Incidents</h2>
+      <h2>
+        {role === 'manager'
+          ? 'My Incidents (Manager)'
+          : role === 'employee'
+          ? 'Assigned Incidents (Employee)'
+          : 'Incidents'}
+      </h2>
+
+      <div className="status-toggle">
+        <button
+          onClick={() => setStatusFilter(false)}
+          className={statusFilter === false ? 'active' : ''}
+        >
+          Open
+        </button>
+        <button
+          onClick={() => setStatusFilter(true)}
+          className={statusFilter === true ? 'acive' : ''}
+        >
+          Closed
+        </button>
+      </div>
+
       {incidents.length === 0 ? (
-        <p>No open incidents found.</p>
+        <p>No {statusFilter} incidents found.</p>
       ) : (
         <div className="incident-grid">
           {incidents.map((incident) => (
@@ -85,3 +111,4 @@ function IncidentCard({ incident }) {
 }
 
 export default IncidentList;
+

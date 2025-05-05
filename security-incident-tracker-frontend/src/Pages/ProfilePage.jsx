@@ -48,6 +48,12 @@ console.log(user)
           <IncidentList user={user} role={profile.role} />
         </div>
       )}
+      {profile.role === 'employee' && (
+        <div className="incident-section">
+          <h2>My Open Incidents</h2>
+          <IncidentList user={user} role={profile.role} />
+        </div>
+      )}
     </div>
   );
 }

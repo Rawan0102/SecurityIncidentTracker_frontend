@@ -20,7 +20,7 @@ function App() {
       try {
         const decoded = jwtDecode(token);
         setCurrentUser({ ...decoded, token });  // includes user info + token
-        console.log("Decoded user:", decoded);
+        // console.log("Decoded user:", decoded);
       } catch (err) {
         console.error("Failed to decode token:", err);
       }
@@ -40,7 +40,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/register" element={<RegisterForm />} />
-        <Route path="/login" element={<LoginForm />} />
+        <Route path="/login" element={<LoginForm setCurrentUser={setCurrentUser}/>} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/profile" element={<ProfilePage user={currentUser} />} />
         <Route path="/report" element={<IncidentForm />} />
