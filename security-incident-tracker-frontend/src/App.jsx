@@ -44,7 +44,7 @@ function App() {
         <Route path="/login" element={<LoginForm setCurrentUser={setCurrentUser}/>} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/profile" element={<ProfilePage user={currentUser} />} />
-        <Route path="/report" element={<IncidentForm />} />
+        <Route path="/new-incident" element={<IncidentForm />} />
         <Route path="/incidents" element={<IncidentList user={currentUser} />} />
         <Route path="/incidents/:id" element={<IncidentDetail user={currentUser?.username} role={currentUser?.role} />} />
         <Route path="/incidents/:id" element={<IncidentDetail />} />

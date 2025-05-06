@@ -37,7 +37,15 @@ console.log(user)
         <div>
           <h3>Need to file something?</h3>
           <p>As a manager, you can create new incident reports.</p>
-          <Link to="/report">➕ Create New Incident</Link>
+          <Link to="/new-incident">➕ Create New Incident</Link>
+        </div>
+      )}
+
+{profile.role === 'employee' &&  (
+        <div>
+          <h3>Need to file something?</h3>
+          <p>As an employee, you can add a report.</p>
+          <Link to="/report">➕ Add New Report</Link>
         </div>
       )}
 

@@ -28,7 +28,7 @@ function IncidentList({ user, role }) {
           let filtered = [];
 
           if (role === 'manager') {
-            const manager = user.username;
+            const manager = user.user_id;
             filtered = data.filter(
               (incident) =>
                 incident.reporter === manager &&

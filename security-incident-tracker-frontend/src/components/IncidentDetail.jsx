@@ -6,7 +6,6 @@ function IncidentDetail({ user}) {
   const { id } = useParams();
   const location = useLocation()
   const {role} = location.state || {}
-  const [status, setStatus] = useState(true)
   const [incident, setIncident] = useState(null);
   const [formData, setFormData] = useState({});
   const [error, setError] = useState('');
@@ -37,9 +36,9 @@ function IncidentDetail({ user}) {
   };
 
   const handleUpdate = async () => {
-    if (formData.resolved === "true" || formData.resolved == "false") {
-        formData.resolved = JSON.parse(formData.resolved);
-    }
+    // if (formData.resolved === "true" || formData.resolved == "false") {
+    //     formData.resolved = JSON.parse(formData.resolved);
+    // }
     console.log(formData)
     try {
       const res = await fetch(`http://localhost:8000/api/incidents/${id}/`, {
