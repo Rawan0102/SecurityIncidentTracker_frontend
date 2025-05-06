@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #0f172a;
+  background-color: #575f71;
   padding: 0.5rem 2rem;
   position: sticky;
   top: 0;
@@ -17,7 +17,7 @@
 }
 
 .navbar-logo {
-  height: 40px;
+  height: 100px;
   margin-right: 0.5rem;
 }
 
@@ -77,8 +77,8 @@ body {
 
 
 body.dark-mode {
-  background-color: #121212;
-  color: #f5f5f5;
+  background-color: #3a3838;
+  color: #0e0d0d;
 }
 
 

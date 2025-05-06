@@ -3,6 +3,8 @@ import './IncidentList.css';
 import SeverityBadge from './SeverityBadge'; 
 import '../App.css';
 import { Link } from 'react-router-dom';
+import CommentList from './CommentList';
+
 
 
 function IncidentList({ user, role }) {
@@ -99,16 +101,31 @@ function IncidentList({ user, role }) {
 
 function IncidentCard({ incident, role }) {
     return (
-      <Link to={`/incidents/${incident.id}`} state={{role: role}} className="incident-card">
-        <h3>{incident.title}</h3>
-        <p>{incident.description}</p>
-        <div className="info-row">
-          <SeverityBadge level={incident.severity} />
-          <span className="timestamp">
-            {new Date(incident.created_at).toLocaleString()}
-          </span>
-        </div>
-      </Link>
+      <div className="incident-card">
+        <Link to={`/incidents/${incident.id}`} state={{ role: role }}>
+          <h3>{incident.title}</h3>
+          <p>{incident.description}</p>
+          <div className="info-row">
+            <SeverityBadge level={incident.severity} />
+            <span className="timestamp">
+              {new Date(incident.created_at).toLocaleString()}
+            </span>
+          </div>
+        </Link>
+  
+        {role === "employee" && (
+          <Link
+            to="/report"
+            state={{ incident_id: incident.id }}
+            className="create-report-button"
+          >
+            + Create Report
+          </Link>
+        )}
+        
+      {/* 🚀 Show comments here */}
+      <CommentList reportId={incident.id} role={role} />
+    </div>
     );
   }
 export default IncidentList;

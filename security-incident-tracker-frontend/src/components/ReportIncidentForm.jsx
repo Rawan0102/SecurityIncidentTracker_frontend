@@ -1,15 +1,21 @@
 import React, { useState } from 'react';
-import { reportIncident } from '../utilities/api';
+// import { reportIncident } from '../utilities/api';
+import { createReport } from '../utilities/report-api';
 import './ReportIncidentForm.css';
+import { useLocation } from 'react-router-dom';
+
 
 
 export default function ReportIncidentForm() {
+  const location = useLocation();
+  const incidentId = location.state?.incident_id;
   const [formData, setFormData] = useState({
     title: '',
     description: '',
     category: '',
     urgency: '',
     location: '',
+    incident: incidentId
   });
 
   const [message, setMessage] = useState('');
@@ -21,10 +27,36 @@ export default function ReportIncidentForm() {
     });
   };
 
-  const handleSubmit = async (e) => {
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     try {
+//       await reportIncident(formData);
+//       setMessage('✅ Incident reported successfully!');
+//       setFormData({
+//         title: '',
+//         description: '',
+//         category: '',
+//         urgency: '',
+//         location: '',
+//       });
+//     } catch (error) {
+//       setMessage('❌ Error: ' + error.message);
+//     }
+//   };
+
+const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await reportIncident(formData);
+      if (!incidentId) {
+        setMessage("❌ No incident ID provided.");
+        return;
+      }
+    console.log(formData)
+      await createReport({
+        ...formData,
+        // incident: incidentId,  // 💡 This ties the report to the correct incident
+      }, incidentId);
+  
       setMessage('✅ Incident reported successfully!');
       setFormData({
         title: '',
@@ -37,6 +69,7 @@ export default function ReportIncidentForm() {
       setMessage('❌ Error: ' + error.message);
     }
   };
+  
 
   return (
     <div className="report-incident-form">
@@ -57,11 +90,11 @@ export default function ReportIncidentForm() {
           Category:
           <select name="category" value={formData.category} onChange={handleChange} required>
             <option value="">-- Select --</option>
-            <option value="Phishing">Phishing</option>
-            <option value="Malware">Malware</option>
-            <option value="Unauthorized Access">Unauthorized Access</option>
-            <option value="Data Leak">Data Leak</option>
-            <option value="Other">Other</option>
+            <option value="phishing">Phishing</option>
+            <option value="malware">Malware</option>
+            <option value="unauthorized access">Unauthorized Access</option>
+            <option value="data leak">Data Leak</option>
+            <option value="other">Other</option>
           </select>
         </label>
 
@@ -69,10 +102,10 @@ export default function ReportIncidentForm() {
           Urgency:
           <select name="urgency" value={formData.urgency} onChange={handleChange} required>
             <option value="">-- Select --</option>
-            <option value="Low">Low</option>
-            <option value="Medium">Medium</option>
-            <option value="High">High</option>
-            <option value="Critical">Critical</option>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+            <option value="critical">Critical</option>
           </select>
         </label>
 

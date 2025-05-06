@@ -15,8 +15,8 @@
   .incident-card a {
     display: inline-block;
     padding: 12px 25px;
-    background-color: #3b82f6;
-    color: white;
+    background-color: #ffffff;
+    color: rgb(69, 55, 55);
     font-size: 1rem;
     font-weight: 600;
     border-radius: 8px;
@@ -25,7 +25,7 @@
   }
   
   .incident-card a:hover {
-    background-color: #2563eb;
+    background-color: #f8f8f8;
     box-shadow: 0 0 10px rgba(37, 99, 235, 0.6);
   }
   

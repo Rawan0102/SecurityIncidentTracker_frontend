@@ -41,13 +41,13 @@ console.log(user)
         </div>
       )}
 
-{profile.role === 'employee' &&  (
+{/* {profile.role === 'employee' &&  (
         <div>
           <h3>Need to file something?</h3>
           <p>As an employee, you can add a report.</p>
           <Link to="/report">➕ Add New Report</Link>
         </div>
-      )}
+      )} */}
 
       {/* ✅ Show manager's own open incidents */}
       {profile.role === 'manager' && (

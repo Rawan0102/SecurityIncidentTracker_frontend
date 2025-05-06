@@ -7,11 +7,11 @@ html {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  padding-top: 4rem!important;
+  /* padding-top: 4rem!important; */
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background: linear-gradient(145deg, #1e1e2f, #2a2a40);
+  color: rgba(3, 3, 3, 0.87);
+  background: linear-gradient(145deg, #8585ab, #c7c7dc);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

@@ -1,5 +1,5 @@
 import './HomePage.css';
-import logo from '../assets/logo.png';
+import logo from '../assets/Logoo.png';
 import React, { useEffect, useState } from 'react';
 
 function HomePage() {

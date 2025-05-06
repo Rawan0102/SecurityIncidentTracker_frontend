@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'; 
 import { NavLink, useNavigate } from 'react-router-dom';
 import './NavBar.css';
-import logo from "../../assets/Logo.png";
+import logo from "../../assets/llogo.png";
 
 export default function NavBar({ user, onLogout }) {
   const navigate = useNavigate();
@@ -76,12 +76,20 @@ export default function NavBar({ user, onLogout }) {
           </li>
         )}
         {user && (
-          <li>
-            <button onClick={handleLogout} className="nav-item logout-btn">
-              Logout
-            </button>
-          </li>
-        )}
+  <>
+    <li>
+      <NavLink to="/profile" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+        Profile
+      </NavLink>
+    </li>
+    <li>
+      <button onClick={handleLogout} className="nav-item logout-btn">
+        Logout
+      </button>
+    </li>
+  </>
+)}
+
         <li>
           <button onClick={toggleDarkMode} className="nav-item dark-toggle">
             {darkMode ? '☀️ Light' : '🌙 Dark'}
