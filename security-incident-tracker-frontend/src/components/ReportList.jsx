@@ -13,7 +13,7 @@ export default function ReportList() {
 
   return (
     <div>
-      <h2>Reports for Incident #{incidentId}</h2>
+      <h2>Reports for Incident {incidentId}</h2>
       <Link to={`/incidents/${incidentId}/new-report`}>+ Add Report</Link>
       {reports.map(report => (
         <div key={report.id}>

@@ -27,22 +27,6 @@ export default function ReportIncidentForm() {
     });
   };
 
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     try {
-//       await reportIncident(formData);
-//       setMessage('✅ Incident reported successfully!');
-//       setFormData({
-//         title: '',
-//         description: '',
-//         category: '',
-//         urgency: '',
-//         location: '',
-//       });
-//     } catch (error) {
-//       setMessage('❌ Error: ' + error.message);
-//     }
-//   };
 
 const handleSubmit = async (e) => {
     e.preventDefault();
