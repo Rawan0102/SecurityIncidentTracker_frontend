@@ -12,6 +12,9 @@ import ReportIncidentForm from './components/ReportIncidentForm';
 import { jwtDecode } from "jwt-decode";
 import IncidentDetail from './components/IncidentDetail';
 import ReportList from './components/ReportList';
+import ProfileForm from './components/ProfileForm/ProfileForm';
+import CommentList from './components/CommentList';
+import ReportDetails from './components/ReportDetails'; 
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -37,8 +40,7 @@ function App() {
 
   return (
     <>
-      <NavBar user={currentUser} onLogout={logoutHandler} />
-
+<NavBar user={currentUser} onLogout={logoutHandler} />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/register" element={<RegisterForm />} />
@@ -50,8 +52,10 @@ function App() {
         <Route path="/incidents/:id" element={<IncidentDetail user={currentUser?.username} role={currentUser?.role} />} />
         <Route path="/incidents/:id" element={<IncidentDetail />} />
         <Route path="/report" element={<ReportIncidentForm />} />
-        <Route path="/incidents/:incidentId/reports/" element={<ReportList />} />
-
+        <Route path="/incidents/:incidentId/reports/" element={<ReportList user={currentUser}/>} />
+        <Route path="/profile/new" element={<ProfileForm user={currentUser} />} />
+        <Route path='/report/:reportId/comments' element={<CommentList />} />
+        <Route path="/reports/:id" element={<ReportDetails user={currentUser} />} />
       </Routes>
     </>
   );

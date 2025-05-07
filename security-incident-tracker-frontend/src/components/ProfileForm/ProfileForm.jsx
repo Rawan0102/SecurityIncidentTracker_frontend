@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { createProfile } from '../../utilities/api';
 
-export default function ProfileForm({ userId, onProfileCreated  }) {
+export default function ProfileForm({ user }) {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
-    user: userId,
-    bio: '',
-    location: '',
+    // bio: '',
+    // location: '',
     role: '',
   });
 
   const handleChange = (e) => {
     setFormData({ 
       ...formData, 
+      user: user.user_id,
       [e.target.name]: e.target.value 
     });
   };
@@ -19,9 +21,11 @@ export default function ProfileForm({ userId, onProfileCreated  }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log('form', formData)
+      console.log('user', user.user_id)
       const newProfile = await createProfile(formData);
       console.log('Profile created:', newProfile);
-      onProfileCreated(newProfile);
+      navigate('/profile')
     } catch (err) {
       console.error('Error creating profile:', err);
     }
@@ -29,8 +33,8 @@ export default function ProfileForm({ userId, onProfileCreated  }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Create Profile</h2>
-      <label>
+      <h2>Create Profile for {user.username}</h2>
+      {/* <label>
         Bio:
         <input
           type="text"
@@ -47,7 +51,7 @@ export default function ProfileForm({ userId, onProfileCreated  }) {
           value={formData.location}
           onChange={handleChange}
         />
-      </label>
+      </label> */}
       <label>
         Role:
         <select

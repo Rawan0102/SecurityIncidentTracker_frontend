@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import './IncidentList.css';
-import SeverityBadge from './SeverityBadge'; 
+import SeverityBadge from './SeverityBadge';
 import '../App.css';
 import { Link } from 'react-router-dom';
 import CommentList from './CommentList';
-
-
 
 function IncidentList({ user, role }) {
   const [incidents, setIncidents] = useState([]);
   const [error, setError] = useState('');
   const [statusFilter, setStatusFilter] = useState(true); // 'open' or 'closed'
-
   useEffect(() => {
     const token = localStorage.getItem('access');
     const fetchIncidents = async () => {
@@ -22,13 +19,10 @@ function IncidentList({ user, role }) {
             Authorization: `Bearer ${token}`,
           },
         });
-
         if (response.ok) {
           const data = await response.json();
           console.log('data', data);
-
           let filtered = [];
-
           if (role === 'manager') {
             const manager = user.user_id;
             filtered = data.filter(
@@ -44,7 +38,6 @@ function IncidentList({ user, role }) {
                 incident.resolved === statusFilter
             );
           }
-
           setIncidents(filtered);
           console.log('filtered incidents', filtered);
         } else {
@@ -55,12 +48,9 @@ function IncidentList({ user, role }) {
         console.error(err);
       }
     };
-
     fetchIncidents();
   }, [user, role, statusFilter]);
-
   if (error) return <p className="error">{error}</p>;
-
   return (
     <div className="incident-list-container">
       <h2>
@@ -70,7 +60,6 @@ function IncidentList({ user, role }) {
           ? 'Assigned Incidents (Employee)'
           : 'Incidents'}
       </h2>
-
       <div className="status-toggle">
         <button
           onClick={() => setStatusFilter(false)}
@@ -85,7 +74,6 @@ function IncidentList({ user, role }) {
           Closed
         </button>
       </div>
-
       {incidents.length === 0 ? (
         <p>No {statusFilter} incidents found.</p>
       ) : (
@@ -98,7 +86,6 @@ function IncidentList({ user, role }) {
     </div>
   );
 }
-
 function IncidentCard({ incident, role }) {
     return (
       <div className="incident-card">
@@ -112,21 +99,25 @@ function IncidentCard({ incident, role }) {
             </span>
           </div>
         </Link>
-  
+        <Link to={`/incidents/${incident.id}/reports`} state={{ role: role}}>
+          See All Incident Reports
+        </Link>
         {role === "employee" && (
-          <Link
-            to="/report"
-            state={{ incident_id: incident.id }}
-            className="create-report-button"
-          >
-            + Create Report
-          </Link>
+          <>
+            <Link to="/report" state={{ incident_id: incident.id}} className="create-report-button">
+              + Create Report
+            </Link>
+          </>
         )}
-        
-      {/* 🚀 Show comments here */}
-      <CommentList reportId={incident.id} role={role} />
+      {/* :rocket: Show comments here */}
+      {/* <CommentList reportId={incident.id} role={role} /> */}
     </div>
     );
   }
 export default IncidentList;
+
+
+
+
+
 

@@ -1,0 +1,60 @@
+.report-details-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+  }
+  
+  .report-details-container h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .report-details-container label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+  }
+  
+  .report-details-container input,
+  .report-details-container textarea {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+  }
+  
+  .report-details-container button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #4caf50;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .report-details-container button:hover {
+    background-color: #45a049;
+  }
+  
+  .report-details-container .delete-btn {
+    background-color: #f44336;
+    margin-left: 1rem;
+  }
+  
+  .report-details-container .delete-btn:hover {
+    background-color: #d32f2f;
+  }
+  
+  .report-details-container .access-msg {
+    color: #777;
+    font-style: italic;
+    text-align: center;
+    margin-top: 1rem;
+  }
+  

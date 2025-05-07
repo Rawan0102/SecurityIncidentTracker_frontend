@@ -8,7 +8,6 @@ import IncidentList from '../components/IncidentList';
 export default function ProfilePage({user}) {
   const [profile, setProfile] = useState(null);
   const [error, setError] = useState('');
-console.log(user)
   useEffect(() => {
     async function fetchProfile() {
       try {
@@ -20,18 +19,19 @@ console.log(user)
     }
     fetchProfile();
   }, []);
-
-  if (error) return <div className="error">{error}</div>;
+  if (error) return (
+    <div className="error">
+      {error}
+      <br/>
+      <Link to='/profile/new'>Create New Profile</Link>
+    </div>)
   if (!profile) return <div>Loading...</div>;
-
   return (
     <div className="profile-page">
       <h1>Welcome, {user.username}</h1>
-
       <p><strong>Role:</strong> {profile.role}</p>
       <p><strong>Bio:</strong> {profile.bio}</p>
       <p><strong>Location:</strong> {profile.location}</p>
-
       {/* Show link only if role is manager */}
       {profile.role === 'manager' &&  (
         <div>
@@ -40,16 +40,14 @@ console.log(user)
           <Link to="/new-incident">➕ Create New Incident</Link>
         </div>
       )}
-
 {/* {profile.role === 'employee' &&  (
         <div>
           <h3>Need to file something?</h3>
           <p>As an employee, you can add a report.</p>
-          <Link to="/report">➕ Add New Report</Link>
+          <Link to="/report">:heavy_plus_sign: Add New Report</Link>
         </div>
       )} */}
-
-      {/* ✅ Show manager's own open incidents */}
+      {/* :white_check_mark: Show manager's own open incidents */}
       {profile.role === 'manager' && (
         <div className="incident-section">
           <h2>My Open Incidents</h2>
