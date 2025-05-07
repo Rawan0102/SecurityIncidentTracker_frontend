@@ -21,7 +21,7 @@ function IncidentList({ user, role }) {
         });
         if (response.ok) {
           const data = await response.json();
-          console.log('data', data);
+        //   console.log('data', data);
           let filtered = [];
           if (role === 'manager') {
             const manager = user.user_id;

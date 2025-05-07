@@ -37,12 +37,10 @@ useEffect(() => {
       try {
         const data = await getReportById(id);
         setReport(data);
+        console.log('report', report)
         setFormData({ 
           title: data.title, 
           description: data.description,
-          category: data.category,
-          urgency: data.urgency,
-          location: data.location
         });
       } catch (err) {
         console.error('Failed to load report:', err);
@@ -59,7 +57,12 @@ useEffect(() => {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      await updateReport(id, formData);
+      await updateReport(id, {...formData, 
+        category: report.category, 
+        urgency: report.urgency, 
+        location: report.location, 
+        incident: report.incident
+      });
       alert('Report updated successfully');
       navigate(`/reports/${id}`);
     } catch (err) {
